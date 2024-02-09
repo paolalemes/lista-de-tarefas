@@ -1,4 +1,5 @@
 let listaTarefas = [];
+let statusAtual = "pendente";
 
 const inputTarefa = document.getElementById("inp-tarefa");
 const btnAdd = document.getElementById("btn-add");
@@ -17,9 +18,8 @@ function adicionarTarefa() {
     tarefa: inputTarefa.value,
     status: "pendente",
   });
-  console.log(listaTarefas);
   inputTarefa.value = "";
-  exibirTarefas("todas");
+  exibirTarefas(statusAtual);
 }
 
 function criarTarefa(task) {
@@ -45,6 +45,10 @@ function criarTarefa(task) {
 }
 
 function exibirTarefas(status = "todas") {
+  if (status == "todas") {
+    statusAtual = "todas";
+  }
+  statusAtual = status;
   divTarefas.innerHTML = "";
   if (status == "todas") {
     listaTarefas.forEach((t) => {
@@ -62,22 +66,21 @@ function exibirTarefas(status = "todas") {
 function verificarTarefa(btn) {
   let id = btn.parentElement.id;
   let idx = listaTarefas.findIndex((item) => item.id == id);
-  console.log(idx, id, listaTarefas[idx].status);
+  if (statusAtual != "todas") statusAtual = listaTarefas[idx].status;
   let novoStatus = listaTarefas[idx].status == "pendente" ? "concluida" : "pendente";
   listaTarefas[idx].status = novoStatus;
-  console.log(listaTarefas[idx].status);
-  exibirTarefas();
+  exibirTarefas(statusAtual);
 }
 
 function apagarTarefa(id) {
   let idx = listaTarefas.findIndex((item) => item.id == id);
+  let statusAtual = listaTarefas[idx].status;
   listaTarefas.splice(idx, 1);
-  exibirTarefas();
+  exibirTarefas(statusAtual);
 }
 
 function editarTarefa(id) {
   let idx = listaTarefas.findIndex((item) => item.id == id);
-  console.log(id, idx, listaTarefas[idx].tarefa);
   inputTarefa.value = listaTarefas[idx].tarefa;
   btnAdd.style.display = "none";
   btnEdit.style.display = "flex";
@@ -90,5 +93,5 @@ function atualizarTarefa(id) {
   inputTarefa.value = "";
   btnAdd.style.display = "flex";
   btnEdit.style.display = "none";
-  exibirTarefas();
+  exibirTarefas(statusAtual);
 }

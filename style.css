@@ -98,7 +98,7 @@ h1 {
 }
 
 .tag:first-child {
-  background-color: rgba(123, 223, 242, 0.5);
+  background-color: rgba(247, 214, 224, 0.5);
 }
 
 .tag:nth-child(2) {
@@ -106,7 +106,7 @@ h1 {
 }
 
 .tag:last-child {
-  background-color: rgba(247, 214, 224, 0.5);
+  background-color: rgba(123, 223, 242, 0.5);
 }
 
 #tarefas {
