@@ -5,8 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista dde Tarefas</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="assets/clipboard.svg" />
   </head>
   <body>
+    <div class="container">
+      <h1>Lista de tarefas</h1>
+      <div id="add-task">
+        <input type="text" />
+        <button>
+          <img src="assets/plus.svg" alt="" />
+        </button>
+      </div>
+
+      <div id="tags">
+        <button>Todas</button>
+        <button>Concluídas</button>
+        <button>Pendentes</button>
+      </div>
+
+      <div id="tarefas">
+        <div class="tarefa">
+          <button class="btn-task pendente"></button>
+          <p>Exemplo de tarefa pendente</p>
+          <div>
+            <button class="btn-edit">
+              <img src="assets/edit.svg" alt="" />
+            </button>
+            <button class="btn-delete">
+              <img src="assets/trash.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
