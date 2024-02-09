@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="assets/clipboard.svg" />
   </head>
-  <body>
+  <body onload="exibirTarefas('todas')">
     <div class="container">
       <h1>Lista de tarefas</h1>
 
@@ -16,12 +16,15 @@
         <button id="btn-add">
           <img src="assets/plus.svg" alt="" />
         </button>
+        <button id="btn-edit">
+          <img src="assets/edit-task.svg" alt="" />
+        </button>
       </div>
 
       <div id="tags">
-        <button class="tag">Todas</button>
-        <button class="tag">Concluídas</button>
-        <button class="tag">Pendentes</button>
+        <button class="tag" onclick="exibirTarefas('todas')">Todas</button>
+        <button class="tag" onclick="exibirTarefas('concluida')">Concluídas</button>
+        <button class="tag" onclick="exibirTarefas('pendente')">Pendentes</button>
       </div>
 
       <div id="tarefas">
