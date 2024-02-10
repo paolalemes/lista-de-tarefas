@@ -27,7 +27,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 45%;
+  width: 50%;
   margin-bottom: 25px;
 }
 
@@ -79,9 +79,10 @@ h1 {
 }
 
 #tags {
-  width: 45%;
+  width: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  flex-wrap: wrap;
 }
 .tag {
   margin: 0px 10px;
@@ -112,7 +113,7 @@ h1 {
 #tarefas {
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 50%;
   margin-top: 20px;
 }
 
@@ -152,4 +153,12 @@ h1 {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  #add-task,
+  #tags,
+  #tarefas {
+    width: 90%;
+  }
 }
