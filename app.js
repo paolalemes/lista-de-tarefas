@@ -1,4 +1,4 @@
-let listaTarefas = [];
+let listaTarefas = JSON.parse(localStorage.getItem("Tarefas")) ?? [];
 let statusAtual = "pendente";
 
 const inputTarefa = document.getElementById("inp-tarefa");
@@ -12,6 +12,10 @@ const btnCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 
 btnAdd.addEventListener("click", adicionarTarefa);
 
+function salvarLista() {
+  localStorage.setItem("Tarefas", JSON.stringify(listaTarefas));
+}
+
 function adicionarTarefa() {
   listaTarefas.push({
     id: crypto.randomUUID(),
@@ -20,6 +24,7 @@ function adicionarTarefa() {
   });
   inputTarefa.value = "";
   exibirTarefas(statusAtual);
+  salvarLista();
 }
 
 function criarTarefa(task) {
@@ -70,12 +75,14 @@ function verificarTarefa(btn) {
   let novoStatus = listaTarefas[idx].status == "pendente" ? "concluida" : "pendente";
   listaTarefas[idx].status = novoStatus;
   exibirTarefas(statusAtual);
+  salvarLista();
 }
 
 function apagarTarefa(id) {
   let idx = listaTarefas.findIndex((item) => item.id == id);
   let statusAtual = listaTarefas[idx].status;
   listaTarefas.splice(idx, 1);
+  salvarLista();
   exibirTarefas(statusAtual);
 }
 
@@ -93,5 +100,6 @@ function atualizarTarefa(id) {
   inputTarefa.value = "";
   btnAdd.style.display = "flex";
   btnEdit.style.display = "none";
+  salvarLista();
   exibirTarefas(statusAtual);
 }
