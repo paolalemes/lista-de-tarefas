@@ -56,20 +56,23 @@
 
     <!-- Form para cadatro de nova tarefa -->
     <form class="form_tarefa">
-      <input type="text" id="form-nomeTarefa" class="form_input_nome" placeholder="Digite sua tarefa" />
-      <div>
-        <button>
-          <img src="assets/plus-circle.svg" alt="" />
-        </button>
-        <span>Tags:</span>
-        <div class="form_div_tags" id="form-tags">
-          <div class="form_div_tags_tag">
+      <input type="text" id="form-nomeTarefa" class="form_tarefa_nome" placeholder="Digite sua tarefa" />
+      <div class="form_tarefa_tags">
+        <div class="form_tarefa_tag_desc">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <img src="assets/plus-circle.svg" alt="" />
+          </button>
+          <span>Tags:</span>
+        </div>
+        <div class="form_tarefa_tag_div" id="form-tags">
+          <!-- <div>
             <label for="tag-trabalho">Trabalho</label>
             <input type="checkbox" name="tags" id="tag-trabalho" value="trabalho" />
-          </div>
+          </div> -->
         </div>
       </div>
-      <button type="submit" id="form-btn-adicionar" class="form_btn_adicionar">Adicionar</button>
+
+      <button type="submit" id="form-btn-adicionar" class="form_tarefa_submit">Adicionar</button>
     </form>
 
     <script
