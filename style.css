@@ -209,7 +209,13 @@ h1 {
   padding: 2px 5px;
   border-radius: 5px;
   margin-left: 5px;
+  /* border: none; */
 }
+
+.check {
+  border: 1px solid black;
+}
+
 .form_tarefa_tag_div label:hover {
   scale: 1.05;
   cursor: pointer;

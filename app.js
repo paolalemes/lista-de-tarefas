@@ -104,7 +104,9 @@
 //   exibirTarefas(statusAtual);
 // }
 
-let listaDeTags = [];
+let listaDeTags = JSON.parse(localStorage.getItem("LT-Tags")) ?? [];
+let listaDeTarefas = JSON.parse(localStorage.getItem("LT-Tasks")) ?? [];
+const btnAticionar = document.getElementById("form-btn-adicionar");
 
 function adicionarTag() {
   let nome = document.getElementById("modal-input-nome").value;
@@ -118,6 +120,7 @@ function adicionarTag() {
   console.log(listaDeTags);
   listarModalTags();
   listarFormTags();
+  salvarInformacoes();
 }
 
 function listarModalTags() {
@@ -139,6 +142,7 @@ function apagarTag(id) {
   let index = listaDeTags.findIndex((item) => item.id == id);
   listaDeTags.splice(index, 1);
   console.log(listaDeTags);
+  salvarInformacoes();
   listarModalTags();
 }
 
@@ -147,9 +151,56 @@ function listarFormTags() {
   listaDeTags.forEach((tag) => {
     let divTag = document.createElement("div");
     divTag.innerHTML = `
-    <label for="tag-${tag.nomeTag}" style="background-color: ${tag.corTag};">${tag.nomeTag}</label>
-    <input type="checkbox" name="tags" id="tag-${tag.nomeTag}" value="trabalho" />
+    <label for="tag-${tag.nomeTag}" onclick="handleCheck('tag-${tag.nomeTag}', this)" style="background-color: ${tag.corTag};">${tag.nomeTag}</label>
+    <input type="checkbox" name="tags" id="tag-${tag.nomeTag}" value="${tag.nomeTag}" />
     `;
     document.getElementById("form-tags").appendChild(divTag);
   });
+}
+
+function salvarInformacoes() {
+  localStorage.setItem("LT-Tags", JSON.stringify(listaDeTags));
+  localStorage.setItem("LT-Tasks", JSON.stringify(listaDeTags));
+}
+
+function adicionarTarefa() {
+  let tarefa = document.getElementById("form-nomeTarefa").value;
+  let tags = checarBox();
+  if (tarefa == "") {
+    alert("Digite uma descrição");
+    return;
+  } else {
+    listaDeTarefas.push({
+      id: crypto.randomUUID(),
+      descricao: tarefa,
+      tags: tags,
+      status: "pendente",
+    });
+  }
+  document.getElementById("form-nomeTarefa").value = "";
+}
+
+function checarBox() {
+  const tags = document.getElementsByName("tags");
+  let tagsSelecionadas = [];
+  for (let i = 0; i < tags.length; i++) {
+    if (tags[i].checked) {
+      tagsSelecionadas.push(tags[i].value);
+    }
+  }
+  return tagsSelecionadas;
+}
+
+btnAticionar.addEventListener("click", (e) => {
+  e.preventDefault();
+  adicionarTarefa();
+});
+
+function handleCheck(tag, label) {
+  let checkbox = document.getElementById(tag);
+  if (!checkbox.checked) {
+    label.classList.add("check");
+  } else {
+    label.classList.remove("check");
+  }
 }
