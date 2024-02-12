@@ -208,6 +208,7 @@ h1 {
   background-color: aquamarine;
   padding: 2px 5px;
   border-radius: 5px;
+  margin-left: 5px;
 }
 .form_tarefa_tag_div label:hover {
   scale: 1.05;

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="assets/clipboard.svg" />
   </head>
-  <body onload="exibirTarefas('pendente')">
+  <body onload="listarFormTags()">
     <h1>Lista de Tarefas</h1>
 
     <!-- Modal para Editar tags -->
@@ -34,12 +34,12 @@
           </div>
           <div class="modal-body">
             <div class="modal_tag_new">
-              <input type="text" id="modal-nomeTag" class="modal_tag_new_nome" placeholder="Digite o nome da tag" />
-              <input type="color" name="" id="modal-corTag" class="modal_tag_new_cor" />
+              <input type="text" id="modal-input-nome" class="modal_tag_new_nome" placeholder="Digite o nome da tag" />
+              <input type="color" name="" id="modal-input-cor" class="modal_tag_new_cor" value="#FBF8CC" />
             </div>
-            <div class="modal_tag_lista">
+            <div class="modal_tag_lista" id="modal-tag-lista">
               <!-- <div>
-                <span>Nome Tag</span>
+                <span style="background-color: ;">Nome Tag</span>
                 <button>
                   <img src="assets/x.svg" alt="" />
                 </button>
@@ -48,7 +48,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn modal_tag_btn_fechar" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn modal_tag_btn_add">Adicionar Tag</button>
+            <button type="button" class="btn modal_tag_btn_add" onclick="adicionarTag()">Adicionar Tag</button>
           </div>
         </div>
       </div>
