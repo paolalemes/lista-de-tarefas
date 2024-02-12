@@ -33,22 +33,22 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="modal_novaTag">
-              <input type="text" id="modal-nomeTag" />
-              <input type="color" name="" id="modal-corTag" />
+            <div class="modal_tag_new">
+              <input type="text" id="modal-nomeTag" class="modal_tag_new_nome" placeholder="Digite o nome da tag" />
+              <input type="color" name="" id="modal-corTag" class="modal_tag_new_cor" />
             </div>
-            <div class="modal_listaTags">
-              <div class="modal_listaTags_tag">
+            <div class="modal_tag_lista">
+              <!-- <div>
                 <span>Nome Tag</span>
-                <button class="modal_button_deleteTag">
+                <button>
                   <img src="assets/x.svg" alt="" />
                 </button>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Understood</button>
+            <button type="button" class="btn modal_tag_btn_fechar" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn modal_tag_btn_add">Adicionar Tag</button>
           </div>
         </div>
       </div>
