@@ -107,6 +107,7 @@
 let listaDeTags = JSON.parse(localStorage.getItem("LT-Tags")) ?? [];
 let listaDeTarefas = JSON.parse(localStorage.getItem("LT-Tasks")) ?? [];
 const btnAticionar = document.getElementById("form-btn-adicionar");
+const sectionTarefas = document.getElementById("tarefas");
 
 function adicionarTag() {
   let nome = document.getElementById("modal-input-nome").value;
@@ -160,7 +161,7 @@ function listarFormTags() {
 
 function salvarInformacoes() {
   localStorage.setItem("LT-Tags", JSON.stringify(listaDeTags));
-  localStorage.setItem("LT-Tasks", JSON.stringify(listaDeTags));
+  localStorage.setItem("LT-Tasks", JSON.stringify(listaDeTarefas));
 }
 
 function adicionarTarefa() {
@@ -178,6 +179,8 @@ function adicionarTarefa() {
     });
   }
   document.getElementById("form-nomeTarefa").value = "";
+  listarTarefas();
+  salvarInformacoes();
 }
 
 function checarBox() {
@@ -203,4 +206,43 @@ function handleCheck(tag, label) {
   } else {
     label.classList.remove("check");
   }
+}
+
+function listarTarefas() {
+  document.getElementById("tarefas").innerHTML = "";
+  listaDeTarefas.forEach((item) => {
+    let divTags = "";
+    item.tags.forEach((tag) => {
+      divTags += `<small>${tag}</small>`;
+    });
+
+    let divTarefa = document.createElement("div");
+    divTarefa.classList.add("section_tarefas_tarefa");
+    divTarefa.innerHTML = `
+      <div class="section_tarefas_tarefa">
+        <div class="tarefa_descrição">
+          <span>${item.descricao}</span>
+          <button>
+            <img src="assets/square.svg" alt="" />
+          </button>
+          <button>
+            <img src="assets/edit.svg" alt="" />
+          </button>
+          <button>
+            <img src="assets/trash.svg" alt="" />
+          </button>
+        </div>
+        <div class="tarefa_tags">
+          ${divTags}
+        </div>
+      </div>
+      
+      `;
+    document.getElementById("tarefas").appendChild(divTarefa);
+  });
+}
+
+function carregarInfos() {
+  listarFormTags();
+  listarTarefas();
 }
