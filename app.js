@@ -108,6 +108,7 @@ let listaDeTags = JSON.parse(localStorage.getItem("LT-Tags")) ?? [];
 let listaDeTarefas = JSON.parse(localStorage.getItem("LT-Tasks")) ?? [];
 const btnAticionar = document.getElementById("form-btn-adicionar");
 const sectionTarefas = document.getElementById("tarefas");
+let idTarefaAtual = "";
 
 function adicionarTag() {
   let nome = document.getElementById("modal-input-nome").value;
@@ -199,15 +200,6 @@ btnAticionar.addEventListener("click", (e) => {
   adicionarTarefa();
 });
 
-function handleCheck(tag, label) {
-  let checkbox = document.getElementById(tag);
-  if (!checkbox.checked) {
-    label.classList.add("check");
-  } else {
-    label.classList.remove("check");
-  }
-}
-
 function listarTarefas() {
   document.getElementById("tarefas").innerHTML = "";
   listaDeTarefas.forEach((item) => {
@@ -225,9 +217,13 @@ function listarTarefas() {
           <button onclick="checarTarefa('${item.id}')">
             <img src="assets/${item.status == "pendente" ? "square.svg" : "check-square.svg"}" alt="" />
           </button>
-          <button>
+
+          <button type="button"  data-bs-toggle="modal" data-bs-target="#modalEditarTarefa" onclick="editarTarefa('${
+            item.id
+          }')">
             <img src="assets/edit.svg" alt="" />
           </button>
+
           <button onclick="apagarTarefa('${item.id}')">
             <img src="assets/trash.svg" alt="" />
           </button>
@@ -262,4 +258,45 @@ function apagarTarefa(id) {
   let index = listaDeTarefas.findIndex((item) => item.id == id);
   listaDeTarefas.splice(index, 1);
   listarTarefas();
+}
+
+function editarTarefa(id) {
+  document.getElementById("div-edit-tag").innerHTML = "";
+  let index = listaDeTarefas.findIndex((item) => item.id == id);
+  document.getElementById("inp-edit-task").value = listaDeTarefas[index].descricao;
+  idTarefaAtual = listaDeTarefas[index].id;
+  listaDeTags.forEach((tag) => {
+    let div = document.createElement("div");
+    div.innerHTML = `
+    <label for="edit-${tag.nomeTag}" style="background-color: ${tag.corTag};" onclick="handleCheck('edit-${tag.nomeTag}', this)">${tag.nomeTag}</label>
+    <input type="checkbox" name="edit-tags" id="edit-${tag.nomeTag}" value="${tag.nomeTag}" />
+    `;
+    document.getElementById("div-edit-tag").appendChild(div);
+  });
+}
+
+function handleCheck(tag, label) {
+  let checkbox = document.getElementById(tag);
+  if (!checkbox.checked) {
+    label.classList.add("check");
+  } else {
+    label.classList.remove("check");
+  }
+}
+
+function atualizarTarefa() {
+  let index = listaDeTarefas.findIndex((item) => item.id == idTarefaAtual);
+  let novaDescricao = document.getElementById("inp-edit-task").value;
+  let novasTags = [];
+  document.getElementsByName("edit-tags").forEach((tag) => {
+    if (tag.checked) {
+      novasTags.push(tag.value);
+    }
+  });
+
+  listaDeTarefas[index].descricao = novaDescricao;
+  listaDeTarefas[index].tags = novasTags;
+
+  listarTarefas();
+  document.getElementById("close-modal").click();
 }

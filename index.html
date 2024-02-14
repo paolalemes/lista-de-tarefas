@@ -47,8 +47,48 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn modal_tag_btn_fechar" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn modal_tag_btn_fechar" data-bs-dismiss="modal" onclick="listarFormTags()">
+              Fechar
+            </button>
             <button type="button" class="btn modal_tag_btn_add" onclick="adicionarTag()">Adicionar Tag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para editar tarefa -->
+    <div
+      class="modal fade"
+      id="modalEditarTarefa"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="modalEditarTarefaLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalEditarTarefaLabel">Editar Tarefa</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body modal_tarefa">
+            <input type="text" id="inp-edit-task" />
+            <div class="modal_tarefa_div">
+              <span>Tags:</span>
+              <div id="div-edit-tag" class="modal_tarefa_tags">
+                <!-- <div>
+                  <label for=""></label>
+                  <input type="checkbox" name="edit-tags" id="" value="" />
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn modal_tag_btn_fechar" data-bs-dismiss="modal" id="close-modal">
+              Close
+            </button>
+            <button type="button" class="btn modal_tag_btn_add" onclick="atualizarTarefa()">Atualizar</button>
           </div>
         </div>
       </div>
@@ -59,7 +99,7 @@
       <input type="text" id="form-nomeTarefa" class="form_tarefa_nome" placeholder="Digite sua tarefa" />
       <div class="form_tarefa_tags">
         <div class="form_tarefa_tag_desc">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#modalTag">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#modalTag" onclick="listarModalTags()">
             <img src="assets/plus-circle.svg" alt="" />
           </button>
           <span>Tags:</span>
