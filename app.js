@@ -222,8 +222,8 @@ function listarTarefas() {
       <div class="section_tarefas_tarefa">
         <div class="tarefa_descrição">
           <span>${item.descricao}</span>
-          <button>
-            <img src="assets/square.svg" alt="" />
+          <button onclick="checarTarefa('${item.id}')">
+            <img src="assets/${item.status == "pendente" ? "square.svg" : "check-square.svg"}" alt="" />
           </button>
           <button>
             <img src="assets/edit.svg" alt="" />
@@ -244,5 +244,16 @@ function listarTarefas() {
 
 function carregarInfos() {
   listarFormTags();
+  listarTarefas();
+}
+
+function checarTarefa(id) {
+  let index = listaDeTarefas.findIndex((item) => item.id == id);
+  let statusTarefa = listaDeTarefas[index].status;
+  if (statusTarefa == "pendente") {
+    listaDeTarefas[index].status = "concluido";
+  } else {
+    listaDeTarefas[index].status = "pendente";
+  }
   listarTarefas();
 }
