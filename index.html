@@ -19,17 +19,17 @@
     <!-- Modal para Editar tags -->
     <div
       class="modal fade"
-      id="staticBackdrop"
+      id="modalTag"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
+      aria-labelledby="modalTagLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Tags</h1>
+            <h1 class="modal-title fs-5" id="modalTagLabel">Editar Tags</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -59,7 +59,7 @@
       <input type="text" id="form-nomeTarefa" class="form_tarefa_nome" placeholder="Digite sua tarefa" />
       <div class="form_tarefa_tags">
         <div class="form_tarefa_tag_desc">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#modalTag">
             <img src="assets/plus-circle.svg" alt="" />
           </button>
           <span>Tags:</span>
