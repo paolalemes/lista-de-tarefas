@@ -228,7 +228,7 @@ function listarTarefas() {
           <button>
             <img src="assets/edit.svg" alt="" />
           </button>
-          <button>
+          <button onclick="apagarTarefa('${item.id}')">
             <img src="assets/trash.svg" alt="" />
           </button>
         </div>
@@ -255,5 +255,11 @@ function checarTarefa(id) {
   } else {
     listaDeTarefas[index].status = "pendente";
   }
+  listarTarefas();
+}
+
+function apagarTarefa(id) {
+  let index = listaDeTarefas.findIndex((item) => item.id == id);
+  listaDeTarefas.splice(index, 1);
   listarTarefas();
 }
