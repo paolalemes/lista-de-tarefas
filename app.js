@@ -123,6 +123,7 @@ function adicionarTag() {
   listarModalTags();
   listarFormTags();
   salvarInformacoes();
+  listarSelectTag();
 }
 
 function listarModalTags() {
@@ -146,6 +147,7 @@ function apagarTag(id) {
   console.log(listaDeTags);
   salvarInformacoes();
   listarModalTags();
+  listarSelectTag();
 }
 
 function listarFormTags() {
@@ -241,6 +243,7 @@ function listarTarefas() {
 function carregarInfos() {
   listarFormTags();
   listarTarefas();
+  listarSelectTag();
 }
 
 function checarTarefa(id) {
@@ -252,6 +255,7 @@ function checarTarefa(id) {
     listaDeTarefas[index].status = "pendente";
   }
   listarTarefas();
+  salvarInformacoes();
 }
 
 function apagarTarefa(id) {
@@ -299,4 +303,40 @@ function atualizarTarefa() {
 
   listarTarefas();
   document.getElementById("close-modal").click();
+}
+
+function listarSelectTag() {
+  let select = document.getElementById("select-tag");
+  select.innerHTML = '<option value="todas">Todas</option>';
+  listaDeTags.forEach((tag) => {
+    let option = document.createElement("option");
+    option.setAttribute("value", tag.nomeTag);
+    option.innerHTML = tag.nomeTag;
+    select.appendChild(option);
+  });
+}
+
+const selectStatus = document.getElementById("select-status");
+const selectTag = document.getElementById("select-tag");
+
+selectStatus.addEventListener("change", filtrarTarefas);
+
+selectTag.addEventListener("change", filtrarTarefas);
+
+function filtrarTarefas() {
+  let exibicao;
+  let status = selectStatus.value;
+  let tag = selectTag.value;
+  console.log(status, tag);
+  if (status == "todas") {
+    exibicao = listaDeTarefas;
+  } else {
+    exibicao = listaDeTarefas.filter((tarefa) => tarefa.status == status);
+  }
+
+  if (tag !== "todas") {
+    exibicao == exibicao.filter((tarefa) => tarefa.tags.includes(tag));
+  }
+
+  console.log(exibicao);
 }
