@@ -233,6 +233,7 @@ h1 {
   width: 45%;
   margin: 20px auto;
   gap: 30px;
+  flex-wrap: nowrap;
 }
 
 .filtros span {
@@ -263,4 +264,54 @@ h1 {
 
 #apagar-concluidas:hover {
   scale: 1.05;
+}
+
+/* @media screen and (max-width: 500px) {
+  .filtros button {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+} */
+@media screen and (max-width: 500px) {
+  .filtros button {
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .filtros {
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+  .filtros button {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .form_tarefa {
+    width: 80%;
+  }
+
+  .filtros {
+    width: 80%;
+    flex-wrap: wrap;
+  }
+
+  .section_tarefas {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .filtros {
+    flex-wrap: wrap;
+  }
+
+  .filtros button {
+    font-size: 15px;
+  }
 }
