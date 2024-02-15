@@ -115,7 +115,20 @@
       <button type="submit" id="form-btn-adicionar" class="form_tarefa_submit">Adicionar</button>
     </form>
 
-    <div class="filtros"></div>
+    <div class="filtros">
+      <div>
+        <span>Status:</span>
+        <select name="status-select" id="select-status">
+          <option value="todas" selected>Todas</option>
+          <option value="concluido">Concluídas</option>
+          <option value="pendente">Pendentes</option>
+        </select>
+      </div>
+      <div>
+        <span>Tags</span>
+        <select name="tag-select" id="select-tag"></select>
+      </div>
+    </div>
 
     <section id="tarefas" class="section_tarefas">
       <!-- <div class="section_tarefas_tarefa">

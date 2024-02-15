@@ -380,3 +380,23 @@ h1 {
 .modal_tarefa_tags input {
   display: none;
 }
+
+.filtros {
+  display: flex;
+  width: 45%;
+  margin: 20px auto;
+  gap: 30px;
+}
+
+.filtros span {
+  color: #9b9b9b;
+}
+
+.filtros select {
+  border-radius: 5px;
+  border: 1px solid #9b9b9b;
+  background: none;
+  color: #9b9b9b;
+  margin-left: 5px;
+  padding: 2px 5px;
+}
