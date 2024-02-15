@@ -109,6 +109,7 @@ let listaDeTarefas = JSON.parse(localStorage.getItem("LT-Tasks")) ?? [];
 const btnAticionar = document.getElementById("form-btn-adicionar");
 const sectionTarefas = document.getElementById("tarefas");
 let idTarefaAtual = "";
+let exibicaoTarefas = [];
 
 function adicionarTag() {
   let nome = document.getElementById("modal-input-nome").value;
@@ -182,7 +183,7 @@ function adicionarTarefa() {
     });
   }
   document.getElementById("form-nomeTarefa").value = "";
-  listarTarefas();
+  listarTarefas(listaDeTarefas);
   salvarInformacoes();
 }
 
@@ -202,9 +203,9 @@ btnAticionar.addEventListener("click", (e) => {
   adicionarTarefa();
 });
 
-function listarTarefas() {
+function listarTarefas(lista) {
   document.getElementById("tarefas").innerHTML = "";
-  listaDeTarefas.forEach((item) => {
+  lista.forEach((item) => {
     let divTags = "";
     item.tags.forEach((tag) => {
       divTags += `<small>${tag}</small>`;
@@ -242,7 +243,7 @@ function listarTarefas() {
 
 function carregarInfos() {
   listarFormTags();
-  listarTarefas();
+  listarTarefas(listaDeTarefas);
   listarSelectTag();
 }
 
@@ -254,14 +255,14 @@ function checarTarefa(id) {
   } else {
     listaDeTarefas[index].status = "pendente";
   }
-  listarTarefas();
+  listarTarefas(listaDeTarefas);
   salvarInformacoes();
 }
 
 function apagarTarefa(id) {
   let index = listaDeTarefas.findIndex((item) => item.id == id);
   listaDeTarefas.splice(index, 1);
-  listarTarefas();
+  listarTarefas(listaDeTarefas);
 }
 
 function editarTarefa(id) {
@@ -301,7 +302,7 @@ function atualizarTarefa() {
   listaDeTarefas[index].descricao = novaDescricao;
   listaDeTarefas[index].tags = novasTags;
 
-  listarTarefas();
+  listarTarefas(listaDeTarefas);
   document.getElementById("close-modal").click();
 }
 
@@ -324,7 +325,6 @@ selectStatus.addEventListener("change", filtrarTarefas);
 selectTag.addEventListener("change", filtrarTarefas);
 
 function filtrarTarefas() {
-  let exibicao;
   let status = selectStatus.value;
   let tag = selectTag.value;
   console.log(status, tag);
@@ -335,8 +335,17 @@ function filtrarTarefas() {
   }
 
   if (tag !== "todas") {
-    exibicao == exibicao.filter((tarefa) => tarefa.tags.includes(tag));
+    exibicao = exibicao.filter((tarefa) => tarefa.tags.includes(tag));
   }
 
-  console.log(exibicao);
+  listarTarefas(exibicao);
 }
+
+function apagarConcluidas() {
+  let novaLista = listaDeTarefas.filter((tarefa) => tarefa.status == "pendente");
+  listaDeTarefas = novaLista;
+  listarTarefas(listaDeTarefas);
+  salvarInformacoes();
+}
+
+document.getElementById("apagar-concluidas").addEventListener("click", apagarConcluidas);
